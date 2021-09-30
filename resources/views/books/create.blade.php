@@ -29,7 +29,7 @@
         if (isUpdatePage) {
             fetch('/api/books/' + '{{ $book->id ?? null }}', {
                 headers: {
-                    'Authorization' : 'Bearer ' + '{{ auth()->user()->token }}'
+                    'Authorization' : 'Bearer ' + '{{ auth()->user()->token ?? '' }}'
                 }
             })
             .then(response => response.json())
@@ -58,7 +58,7 @@
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
-                    'Authorization' : 'Bearer ' + '{{ auth()->user()->token }}'
+                    'Authorization' : 'Bearer ' + '{{ auth()->user()->token ?? '' }}'
                 },
                 body: JSON.stringify(data),
             })
@@ -93,7 +93,7 @@
                 method: 'post',
                 body: formData,
                 headers: {
-                    'Authorization' : 'Bearer ' + '{{ auth()->user()->token }}'
+                    'Authorization' : 'Bearer ' + '{{ auth()->user()->token ?? '' }}'
                 }
             })
             .then(response => response.json())

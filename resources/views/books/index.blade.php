@@ -24,7 +24,7 @@
     <script>
         fetch('/api/books', {
             headers: {
-                'Authorization' : 'Bearer ' + '{{ auth()->user()->token }}'
+                'Authorization' : 'Bearer ' + '{{ auth()->user()->token ?? '' }}'
             }
         })
         .then(response => response.json())
@@ -40,7 +40,7 @@
                         authors += `${el.author_name}<br>`;
                     });
                     let isOwner = '';
-                    if (data[i].publisher_id == '{{ auth()->user()->publisher->id }}') {
+                    if (data[i].publisher_id == '{{ auth()->user()->publisher->id ?? '' }}') {
                         isOwner = `<div class="row">
                                             <div class="col-md-2 offset-7">
                                                     <button class="btn btn-danger" onclick="deleteBook(${data[i].id})">Delete</button>
@@ -71,7 +71,7 @@
             fetch(`/api/books/${id}`, {
                 method: 'DELETE',
                 headers: {
-                    'Authorization' : 'Bearer ' + '{{ auth()->user()->token }}'
+                    'Authorization' : 'Bearer ' + '{{ auth()->user()->token ?? '' }}'
                 }
             })
             .then(response => response.json())

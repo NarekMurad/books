@@ -7,11 +7,15 @@ use App\Models\Book;
 use App\Services\BookService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
 class BooksController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('bearer')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
